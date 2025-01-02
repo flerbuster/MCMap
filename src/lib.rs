@@ -316,7 +316,7 @@ pub fn apply_mappings_from_mappings_text(text: &str, mappings_text: &str) -> Str
     let mut parser = MappingsParser::new("brain.busitng");
     let mappings = parser.parse_with_content(mappings_text);
 
-    return apply_mappings(text, mappings)
+    return apply_mappings(text, mappings);
 }
 
 #[wasm_bindgen]
