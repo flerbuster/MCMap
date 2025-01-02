@@ -242,12 +242,6 @@ const exported = {
 async function brainbusting() {
     try {
         wasm = await __wbg_init()
-        console.log("wasm: ", wasm)
-
-        console.log(apply_mappings_from_mappings_text("class_2345", "c	a	net/minecraft/class_2345    com/mojang/math/Axis"))
-        
-
-
     } catch (error) {
         console.error('Error loading or calling WASM:', error);
     }
@@ -255,8 +249,8 @@ async function brainbusting() {
 
 let mappingFile = null
 
-document.getElementById('readFileButton').addEventListener('click', () => {
-    const fileInput = document.getElementById('fileInput');
+document.getElementById('applyMappingsButton').addEventListener('click', () => {
+    const fileInput = document.getElementById('mapping-file');
     const file = fileInput.files[0];
     
     if (file) {
@@ -266,7 +260,7 @@ document.getElementById('readFileButton').addEventListener('click', () => {
             const fileContent = event.target.result;
             mappingFile = fileContent
 
-            document.getElementById('fileContentOutput').textContent = apply_mappings_from_mappings_text(document.getElementById('textarea1').value, mappingFile);
+            document.getElementById('LogWithMappings').textContent = apply_mappings_from_mappings_text(document.getElementById('LogArea').value, mappingFile);
         };
         
         reader.onerror = function() {

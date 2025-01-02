@@ -254,19 +254,51 @@ fn file_to_mappings(file_path: &str) -> Mappings {
     return mappings;
 }
 
+trait MappingSafeReplace {
+    fn mappings_safe_replace(&self, from: &str, to: &str) -> String;
+}
+
+impl MappingSafeReplace for String {
+    fn mappings_safe_replace(&self, from: &str, to: &str) -> String {
+        let mut result = String::new();
+        let mut last_end = 0;
+
+        for (start, part) in self.match_indices(from) {
+            let end = start + part.len();
+            if end != self.len() {
+                let end_char = self.chars().nth(end).unwrap();
+                
+                match end_char {
+                    '0'..='9' => {
+                        continue;
+                    }
+                    _ => {}
+                };
+            }
+
+            result.push_str(unsafe { self.get_unchecked(last_end..start) });
+            result.push_str(to);
+            last_end = start + part.len();
+        }
+        result.push_str(unsafe { self.get_unchecked(last_end..self.len()) });
+        
+        return result;
+    }
+}
+
 fn apply_mappings(text: &str, mappings: Mappings) -> String {
     let mut result_text = text.to_string();
 
     // effizienz busting
     for class in mappings.classes {
-        result_text = result_text.replace(&class.intermediary_name.name, &class.name.name);
+        result_text = result_text.mappings_safe_replace(&class.intermediary_name.name, &class.name.name);
 
         for field in class.fields {
-            result_text = result_text.replace(&field.intermediary_name, &field.name);
+            result_text = result_text.mappings_safe_replace(&field.intermediary_name, &field.name);
         }
 
         for function in class.methods {
-            result_text = result_text.replace(&function.intermediary_name, &function.name);
+            result_text = result_text.mappings_safe_replace(&function.intermediary_name, &function.name);
         }
     }
 
@@ -295,3 +327,122 @@ pub fn file_to_serialized_mappings(file_path: &str) -> String {
 
     return json_str.unwrap();
 }
+
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// ich will dass auf github steht dass das ein rust projekt ist 
+// zählen kommentare da
